@@ -1,0 +1,32 @@
+{
+  "Default": {
+    "vs.general.version": {
+      "Major": 2023,
+      "Minor": 6,
+      "Revision": 0,
+      "Hotfix": 0
+    }
+  },
+  "Default (migrated)": {
+    "server.host": "Coverity",
+    "server.port": 8080,
+    "server.ssl": false,
+    "server.username": "",
+    "stream": "SEM.WEBAPI",
+    "vs.analysis.additional_CovRunDesktop_option": "--parse-warnings-config   parse_warnings.conf ",
+    "vs.analysis.code_base_dir": "${SolutionRoot}",
+    "vs.analysis.file_exclusion": [],
+    "vs.analysis.msCodeAnalysis_encoding": null,
+    "vs.build.custom_working_directory": "",
+    "vs.extend_checkers_dir": "C:\\cov-analysis-win64-2023.6.0\\bin",
+    "vs.general.active_configuration": true,
+    "vs.license_path": "C:\\cov-analysis-win64-2023.6.0\\bin\\license.dat",
+    "vs.streams.remote_streams": [
+      "SEM.WEBAPI",
+      "SEM.WEBAPI-64"
+    ],
+    "vs.tools_dir": "C:\\cov-analysis-win64-2023.6.0\\",
+    "vs.ui.local_search_paths": [],
+    "vs.ui.remote_strip_paths": []
+  }
+}
