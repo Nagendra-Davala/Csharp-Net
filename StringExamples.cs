@@ -13,6 +13,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Security.AccessControl;
@@ -35,8 +36,10 @@ namespace C_.Net
                 int secondNumber = int.Parse(strings[i + 1]);
                 if (firstNumber - secondNumber == 1 || firstNumber - secondNumber == -1)
                 {
-                    if (i != strings.Length - 2) continue;
-                    Console.WriteLine("Consecutive");
+                    if (i == strings.Length - 2) 
+                      Console.WriteLine("Consecutive");
+                    else
+                        continue;
                 }
                 else
                 {
@@ -98,5 +101,200 @@ namespace C_.Net
             }
             Console.WriteLine(pasclName);
         }
+
+        public void ReverseString()
+        {
+            Console.WriteLine("Please enter a String");
+            string input = Console.ReadLine() ?? string.Empty;
+            for (int j = input.Length-1; j >=0 ; j--)
+            {
+                Console.Write(input[j]);
+            }
+
+        }
+
+        public void IsPalindrome()
+        {
+            Console.WriteLine("Please enter a String");
+            string input = Console.ReadLine() ?? string.Empty;
+            bool isPalindrome = true;
+            for ( int j = input.Length-1, i=0; j >= input.Length/2 ; i++,j--)
+            {
+                if(input[j] != input[i])
+                {
+                    isPalindrome = false;
+                    break;
+                }
+            }
+
+            if (isPalindrome)
+            {
+                Console.WriteLine("Palindrome");
+            } else {
+                Console.WriteLine("No a palindrome");
+
+            }
+        }
+
+        public void ReversrOfString()
+        {
+            Console.WriteLine("Please enter a String");
+            string input = Console.ReadLine() ?? string.Empty;
+            var words = input.Split(' ');
+            for (int j = words.Length-1; j >=0; j--) {
+                Console.Write(words[j]);
+                Console.Write(' ');
+
+            }
+        }
+
+        public void ReverseEachWord()
+        {
+            Console.WriteLine("Please enter a String");
+            string str = Console.ReadLine() ?? string.Empty;
+            int start = 0;
+            for (int j = 0; j < str.Length; j++) {
+
+                if (str[j] == ' ') {
+                    int i = j - 1;
+                    while (i >= start)
+                    {
+                        Console.Write(str[i]);
+                        i--;
+                    }
+                    start = j + 1;
+                    Console.Write(' ');
+                }
+            }
+
+            for (int j = str.Length - 1; j >= start; j--) { 
+                Console.Write(str[j]);
+            }
+
+        }
+
+        public  void ReverseWordOrder()
+        {
+            Console.WriteLine("Please enter a String");
+            string str = Console.ReadLine() ?? string.Empty;
+            int i;
+            StringBuilder reverseSentence = new StringBuilder();
+
+            int Start = str.Length - 1;
+            int End = str.Length - 1;
+
+            while (Start > 0)
+            {
+                if (str[Start] == ' ')
+                {
+                    i = Start + 1;
+                    while (i <= End)
+                    {
+                        reverseSentence.Append(str[i]);
+                        i++;
+                    }
+                    reverseSentence.Append(' ');
+                    End = Start - 1;
+                }
+                Start--;
+            }
+
+            for (i = 0; i <= End; i++)
+            {
+                reverseSentence.Append(str[i]);
+            }
+            Console.WriteLine(reverseSentence.ToString());
+        }
+
+        public void CountTheCharacters()
+        {
+            Console.WriteLine("Please enter a String");
+            string str = Console.ReadLine() ?? string.Empty;
+            Dictionary<char, int> charactersCount = new Dictionary<char, int>();
+
+            foreach (char c in str)
+            {
+                if (!charactersCount.ContainsKey(c))
+                {
+                    charactersCount[c] = 1;
+                }
+                else
+                {
+                    charactersCount[c]++;
+                }
+            }
+            foreach (var n in charactersCount)
+            {
+                Console.WriteLine("{0} repeated {1} times", n.Key , n.Value);
+            }
+        }
+
+        public void RemoveDuplicates()
+        {
+            Console.WriteLine("Please enter a String");
+            string str = Console.ReadLine() ?? string.Empty;
+            string nonDuplicateString = string.Empty;
+            for(int i=0; i<str.Length; i++)
+            {
+                if (nonDuplicateString.Contains(str[i]))
+                {
+                    continue;
+                }
+
+                nonDuplicateString += str[i];
+            }
+
+            Console.WriteLine(nonDuplicateString);
+        }
+
+        public void AllPossibleSubStrings()
+        {
+            Console.WriteLine("Please enter a String");
+            string str = Console.ReadLine() ?? string.Empty;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                StringBuilder stringBuilder = new StringBuilder(str.Length - i);
+                for (int j = i; j < str.Length; j++)
+                {
+                    stringBuilder.Append(str[j]);
+                    Console.Write(stringBuilder + " ");
+                }
+            }
+        }
+
+        public void RemoveDuplicates(ref char[] str, ref int length)
+        {
+            if (length == 0 || length == 1)
+                return;
+
+            int index = 0; // Position for unique characters
+
+            for (int i = 0; i < length; i++)
+            {
+                bool isDuplicate = false;
+
+                // Check if str[i] appeared before in str[0...index-1]
+                for (int j = 0; j < index; j++)
+                {
+                    if (str[i] == str[j])
+                    {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+
+                // If not duplicate, add to the new position
+                if (!isDuplicate)
+                {
+                    str[index] = str[i];
+                    index++;
+                }
+            }
+
+            // Adjust length of the string
+            length = index;
+        }
+
     }
 }
