@@ -30,5 +30,39 @@ namespace C_.Net
             return false;
         }
 
+        /*
+         * Given two strings s and t, return true if the two strings are anagrams of each other, otherwise return false.
+         * An anagram is a string that contains the exact same characters as another string, but the order of the characters can be different.
+         * Example1:Input: s = "racecar", t = "carrace" Output: true
+         * Example2:Input: s = "jar", t = "jam" Output: false
+         * In C#, a HashMap is typically referred to as a Dictionary<TKey, TValue>, and it provides a collection of key-value pairs.
+         * Each key must be unique, and the associated value can be of any data type.
+         * Internally, a hash table is used to store the data, providing fast lookups for retrieving values based on their keys.
+         */
+        public bool IsAnagram(string s, string t)
+        {
+            if (s.Length != t.Length)
+            {
+                return false;
+            }
+            Dictionary<string, int> sMap = new Dictionary<string, int>();
+            Dictionary<string, int> tMap = new Dictionary<string, int>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                sMap[s[i].ToString()] = 1 + sMap.GetValueOrDefault(s[i].ToString(), 0);
+                tMap[t[i].ToString()] = 1 + tMap.GetValueOrDefault(t[i].ToString(), 0);
+            }
+
+            foreach (var key in sMap.Keys)
+            {
+                if (!tMap.ContainsKey(key) || sMap[key] != tMap[key])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
     }
 }
