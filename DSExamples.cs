@@ -64,5 +64,32 @@ namespace C_.Net
             return true;
         }
 
+        /*
+         * Given an array of integers nums and an integer target, return the indices i and j such that nums[i] + nums[j] == target and i != j.
+         * You may assume that every input has exactly one pair of indices i and j that satisfy the condition.
+         * Return the answer with the smaller index first.
+         * Example1:Input: nums = [3,4,5,6], target = 7 Output: [0,1]
+         * Example2:Input: nums = [4,5,6], target = 10 Output: [0,2]
+         * Example3:Input: nums = [5,5], target = 10 Output: [0,1]
+         *  dif = target-arra[i] is the only number gives the target.
+         *  Storing all the array elements with the index in the Dictionary.
+         *  Validate or verify diff value present in the dictionary or not. if exists return the their indices.
+         */
+        public int[] TwoSum(int[] nums, int target)
+        {
+            Dictionary<int, int> numsHash = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int dif = target - nums[i];
+                if (numsHash.ContainsKey(dif))
+                {
+                    return new int[] { numsHash[dif], i };
+                }
+                numsHash[nums[i]] = i;
+            }
+
+            return null;
+        }
+
     }
 }
