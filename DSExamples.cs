@@ -91,5 +91,38 @@ namespace C_.Net
             return null;
         }
 
+        /*
+         * Given an array of strings strs, group all anagrams together into sublists. You may return the output in any order.
+         * An anagram is a string that contains the exact same characters as another string, but the order of the characters can be different.
+         * Example1:Input: strs = ["act","pots","tops","cat","stop","hat"] Output: [["hat"],["act", "cat"],["stop", "pots", "tops"]]
+         * Example2: Input: strs = ["x"] Output: [["x"]]
+         * Example3:Input: strs = [""] Output: [[""]]
+         * for string abc: charCountArray:[1,1,1,0,0,...]. it is key and finds the similar key. 
+         * 
+         */
+        public IList<IList<string>> GroupAnagrams(string[] strs)
+        {
+            Dictionary<string, List<string>> result = new Dictionary<string, List<string>>();
+            foreach (var str in strs)
+            {
+                int[] charCount = new int[26];
+                foreach (char c in str)
+                {
+                    charCount[c - 'a']++;
+                }
+                string key = string.Join(",", charCount);
+
+                if (!result.ContainsKey(key))
+                {
+                    result[key] = new List<string>();
+                }
+
+                result[key].Add(str);
+            }
+
+            return result.Values.ToList<IList<string>>();
+
+        }
+
     }
 }
