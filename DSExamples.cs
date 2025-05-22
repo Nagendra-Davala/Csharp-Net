@@ -124,5 +124,57 @@ namespace C_.Net
 
         }
 
+
+        /*
+         * Given an integer array nums and an integer k, return the k most frequent elements within the array.
+         * The test cases are generated such that the answer is always unique.You may return the output in any order.
+         * Example1:Input: nums = [1,2,2,3,3,3], k = 2 Output: [2,3]
+         * Example2: Input: nums = [7,7], k = 1 Output: [7]
+         * BucketSort Algorithem
+         */
+        public int[] TopKFrequent(int[] nums, int k)
+        {
+            Dictionary<int, int> count = new Dictionary<int, int>();
+
+            foreach (int i in nums)
+            {
+                if (!count.ContainsKey(i))
+                {
+                    count[i] = 1;
+                }
+                else
+                {
+                    count[i] = 1 + count[i];
+                }
+            }
+
+            List<int>[] bucket = new List<int>[nums.Length + 1];
+            for (int i = 0; i <= nums.Length; i++)
+            {
+                bucket[i] = new List<int>();
+            }
+
+            foreach (var i in count)
+            {
+                bucket[i.Value].Add(i.Key);
+            }
+
+            List<int> result = new List<int>();
+            for (int i = nums.Length; i >= 0 && result.Count < k; i--)
+            {
+                foreach (int num in bucket[i])
+                {
+                    result.Add(num);
+                    if (result.Count == k)
+                    {
+                        break;
+                    }
+
+                }
+            }
+
+            return result.ToArray();
+        }
+
     }
 }
