@@ -176,5 +176,48 @@ namespace C_.Net
             return result.ToArray();
         }
 
+
+        /*
+         * Design an algorithm to encode a list of strings to a single string. The encoded string is then decoded back to the original list of strings.
+         * Please implement encode and decode
+         * Example:Input: ["neet","code","love","you"] Output:["neet","code","love","you"]
+         */
+
+        public string Encode(IList<string> strs)
+        {
+            string res = "";
+            foreach (string s in strs)
+            {
+                res += s.Length + "#" + s;
+            }
+
+            return res;
+        }
+
+        public List<string> Decode(string s)
+        {
+            List<string> result = new List<string>();
+            int j = 0;
+            int previous = 0;
+            int i = 0;
+            while (i < s.Length)
+            {
+                if (s[i] == '#')
+                {
+                    int count = int.Parse(s.Substring(previous, i - previous));
+                    string subString = s.Substring(i + 1, count);
+                    result.Add(subString);
+                    i = i + count + 1;
+                    previous = i;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+
+            return result;
+        }
+
     }
 }
