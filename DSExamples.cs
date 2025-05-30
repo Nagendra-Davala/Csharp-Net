@@ -219,5 +219,29 @@ namespace C_.Net
             return result;
         }
 
+        /*
+         * Given an integer array nums, return an array output where output[i] is the product of all the elements of nums except nums[i].
+         * Input: nums = [1,2,4,6] Output: [48,24,12,8]
+         * Input: nums = [-1,0,1,2,3] Output: [0,-6,0,0,0]
+         */
+        public int[] ProductExceptSelf(int[] nums)
+        {
+            int n = nums.Length;
+            int[] result = new int[n];
+            int prefix = 1;
+            for (int i = 0; i < n; i++)
+            {
+                result[i] = prefix;
+                prefix = prefix * nums[i];
+            }
+            int postfix = 1;
+            for (int i = n - 1; i >= 0; i--)
+            {
+                result[i] = postfix * result[i];
+                postfix = postfix * nums[i];
+            }
+            return result;
+        }
+
     }
 }
