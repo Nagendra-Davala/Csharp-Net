@@ -296,5 +296,31 @@ namespace C_.Net
             length = index;
         }
 
+        public string ReverseRecursive(string s)
+        {
+            //var reverseString = new string(s.Reverse().ToArray());
+            //Console.WriteLine("vowelsCount:{0}", input3.Count(c => "aeiouAEIOU".Contains(c))); Count Vowels
+            if (s.Length <= 1) return s;
+            return ReverseRecursive(s.Substring(1)) + s[0];
+        }
+
+        public bool IsValid(string s)
+        {
+            Stack<char> stack = new Stack<char>();
+            Dictionary<char, char> pairs = new Dictionary<char, char> {{ ')', '(' }, { ']', '[' }, { '}', '{' } };
+
+            foreach (char c in s)
+            {
+                if (pairs.ContainsValue(c))
+                    stack.Push(c);
+                else if (pairs.ContainsKey(c))
+                {
+                    if (stack.Count == 0 || stack.Pop() != pairs[c])
+                        return false;
+                }
+            }
+            return stack.Count == 0;
+        }
+
     }
 }
